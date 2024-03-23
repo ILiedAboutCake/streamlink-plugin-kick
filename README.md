@@ -1,12 +1,13 @@
 # Streamlink Kick plugin, with Stomp support
 
-A Simple [Kick.com](https://kick.com) plugin for [Streamlink](https://github.com/streamlink/streamlink). This plugin uses a private proxy service, run by Destiny.GG. Public access will NOT be provided. This plugin is a fork of [nonvegan/streamlink-plugin-kick](https://github.com/nonvegan/streamlink-plugin-kick).
+A Simple [Kick.com](https://kick.com) plugin for [Streamlink](https://github.com/streamlink/streamlink). This plugin uses a private Cloudflare-Aware Kick "API" bypass proxy service, run by Destiny.GG. Public access will NOT be provided. This plugin is a fork of [nonvegan/streamlink-plugin-kick](https://github.com/nonvegan/streamlink-plugin-kick).
 
-Know your `Authorization` header for the DGG stomp microservice. If you have to ask, you (probably) should not be trying to use this.
+You can (probably) make your own Stomp if [you](https://i.imgur.com/1TCfbdG.png) [have](https://github.com/VeNoMouS/cloudscraper) [the](https://github.com/tiangolo/fastapi) [skillz](https://github.com/cloudflare/cloudflared).
+
+Know your `Authorization` header for the DGG Stomp microservice. If you have to ask who can give you an API key, you (probably) should not be trying to use this.
 
 ## Install
 
-- pip install requests (maybe?)
 - Copy the [kick.py](kick.py) file into one of the the [sideload directories](https://streamlink.github.io/cli/plugin-sideloading.html)
 
 ## Usage
