@@ -6,8 +6,7 @@ Know your `Authorization` header for the DGG stomp microservice. If you have to 
 
 ## Install
 
-- pip install [cloudscraper](https://pypi.org/project/cloudscraper)
-  - For Windows users with streamlink builds which come bundled with an embedded Python environment, regular pip will not suffice and a ModuleNotFoundError will be raised when running streamlink. You can fix this by adding `--target=<StreamLinkInstallPath>\pkgs`
+- pip install requests (maybe?)
 - Copy the [kick.py](kick.py) file into one of the the [sideload directories](https://streamlink.github.io/cli/plugin-sideloading.html)
 
 ## Usage
