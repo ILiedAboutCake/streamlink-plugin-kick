@@ -5,13 +5,12 @@ $type live, vod
 """
 
 import re
-import cloudscraper
+import requests
 import logging
 
-from streamlink.plugin import Plugin, pluginmatcher
+from streamlink.plugin import Plugin, pluginmatcher, pluginargument
 from streamlink.plugin.api import validate
 from streamlink.stream import HLSStream
-from streamlink.utils.parse import parse_json
 from streamlink.exceptions import PluginError
 
 
@@ -38,9 +37,16 @@ log = logging.getLogger(__name__)
     ),
     name="clip",
 )
+@pluginargument(
+    "dgg-stomp-auth",
+    required=True,
+    metavar="STOMP",
+    help="Authorization header for stomp.destiny.gg",
+)
 class KICK(Plugin):
     def _get_streams(self):
-        API_BASE_URL = "https://kick.com/api"
+
+        API_BASE_URL = "https://stomp.destiny.gg/api"
 
         _LIVE_SCHEMA = validate.Schema(
             validate.parse_json(),
@@ -110,8 +116,7 @@ class KICK(Plugin):
         )
 
         try:
-            scraper = cloudscraper.create_scraper()
-            res = scraper.get(
+            res = requests.get(
                 "{0}/{1}/{2}".format(
                     API_BASE_URL,
                     *(
@@ -123,7 +128,8 @@ class KICK(Plugin):
                             else ["v2/clips", self.match["clip_id"]]
                         )
                     )
-                )
+                ),
+                headers={"Authorization": self.get_option("dgg-stomp-auth")},
             )
 
             url, self.id, self.author, self.title, self.category = (
@@ -133,9 +139,6 @@ class KICK(Plugin):
         except (PluginError, TypeError) as err:
             log.debug(err)
             return
-        
-        finally:
-            scraper.close()
 
         if live or vod:
             yield from HLSStream.parse_variant_playlist(self.session, url).items()
